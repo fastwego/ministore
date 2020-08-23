@@ -54,11 +54,11 @@ func TestDeliveryGetDeliveryCompanyList(t *testing.T) {
 			gotResp, err := GetDeliveryCompanyList(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("DeliveryGetDeliveryCompanyList() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("GetDeliveryCompanyList() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("DeliveryGetDeliveryCompanyList() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("GetDeliveryCompanyList() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -89,11 +89,11 @@ func TestDeliverySendDelivery(t *testing.T) {
 			gotResp, err := SendDelivery(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("DeliverySendDelivery() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("SendDelivery() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("DeliverySendDelivery() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("SendDelivery() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
