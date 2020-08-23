@@ -1,4 +1,27 @@
+// Copyright 2020 FastWeGo
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package sku
+
+import (
+	"github.com/fastwego/ministore"
+	"github.com/fastwego/ministore/test"
+	"net/http"
+	"os"
+	"reflect"
+	"testing"
+)
 
 func TestMain(m *testing.M) {
 	test.Setup()
@@ -10,11 +33,11 @@ func TestSkuAddSku(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuAddSku, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiAddSku, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -23,19 +46,19 @@ func TestSkuAddSku(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuAddSku(tt.args.ctx, tt.args.payload)
+			gotResp, err := AddSku(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuAddSku() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("AddSku() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuAddSku() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("AddSku() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -45,11 +68,11 @@ func TestSkuBatchAddSku(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuBatchAddSku, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiBatchAddSku, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -58,19 +81,19 @@ func TestSkuBatchAddSku(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuBatchAddSku(tt.args.ctx, tt.args.payload)
+			gotResp, err := BatchAddSku(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuBatchAddSku() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("BatchAddSku() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuBatchAddSku() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("BatchAddSku() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -80,11 +103,11 @@ func TestSkuDelSku(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuDelSku, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiDelSku, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -93,19 +116,19 @@ func TestSkuDelSku(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuDelSku(tt.args.ctx, tt.args.payload)
+			gotResp, err := DelSku(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuDelSku() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("DelSku() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuDelSku() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("DelSku() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -115,11 +138,11 @@ func TestSkuGetSku(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuGetSku, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiGetSku, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -128,19 +151,19 @@ func TestSkuGetSku(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuGetSku(tt.args.ctx, tt.args.payload)
+			gotResp, err := GetSku(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuGetSku() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("GetSku() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuGetSku() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("GetSku() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -150,11 +173,11 @@ func TestSkuUpSku(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuUpSku, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiUpSku, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -163,19 +186,19 @@ func TestSkuUpSku(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuUpSku(tt.args.ctx, tt.args.payload)
+			gotResp, err := UpSku(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuUpSku() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("UpSku() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuUpSku() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("UpSku() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -185,11 +208,11 @@ func TestSkuUpSkuPrice(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuUpSkuPrice, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiUpSkuPrice, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -198,19 +221,19 @@ func TestSkuUpSkuPrice(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuUpSkuPrice(tt.args.ctx, tt.args.payload)
+			gotResp, err := UpSkuPrice(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuUpSkuPrice() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("UpSkuPrice() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuUpSkuPrice() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("UpSkuPrice() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -220,11 +243,11 @@ func TestSkuUpStock(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuUpStock, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiUpStock, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -233,19 +256,19 @@ func TestSkuUpStock(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuUpStock(tt.args.ctx, tt.args.payload)
+			gotResp, err := UpStock(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuUpStock() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("UpStock() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuUpStock() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("UpStock() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}
@@ -255,11 +278,11 @@ func TestSkuGetStock(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiSkuGetStock, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiGetStock, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -268,19 +291,19 @@ func TestSkuGetStock(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := SkuGetStock(tt.args.ctx, tt.args.payload)
+			gotResp, err := GetStock(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("SkuGetStock() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("GetStock() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotResp, tt.wantResp) {
-				t.Errorf("SkuGetStock() gotResp = %v, want %v", gotResp, tt.wantResp)
+				t.Errorf("GetStock() gotResp = %v, want %v", gotResp, tt.wantResp)
 			}
 		})
 	}

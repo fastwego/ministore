@@ -1,93 +1,112 @@
+// Copyright 2020 FastWeGo
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Package sku SKU接口(修改需要重新上架商品)
 package sku
 
+import (
+	"bytes"
+	"github.com/fastwego/ministore"
+)
+
 const (
-	apiSkuAddSku      = "/product/sku/add"
-	apiSkuBatchAddSku = "/product/sku/batch_add"
-	apiSkuDelSku      = "/product/sku/del"
-	apiSkuGetSku      = "/product/sku/get"
-	apiSkuUpSku       = "/product/sku/update"
-	apiSkuUpSkuPrice  = "/product/sku/update_price"
-	apiSkuUpStock     = "/product/sku/stock/update"
-	apiSkuGetStock    = "/product/sku/stock/get"
+	apiAddSku      = "/product/sku/add"
+	apiBatchAddSku = "/product/sku/batch_add"
+	apiDelSku      = "/product/sku/del"
+	apiGetSku      = "/product/sku/get"
+	apiUpSku       = "/product/sku/update"
+	apiUpSkuPrice  = "/product/sku/update_price"
+	apiUpStock     = "/product/sku/stock/update"
+	apiGetStock    = "/product/sku/stock/get"
 )
 
 /*
 添加SKU
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/add_sku.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/add_sku.html
 POST https://api.weixin.qq.com/product/sku/add?access_token=xxxxxxxxx
 */
-func SkuAddSku(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuAddSku, bytes.NewReader(payload), "application/json;charset=utf-8")
+func AddSku(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiAddSku, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 批量添加SKU
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/batch_add_sku.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/batch_add_sku.html
 POST https://api.weixin.qq.com/product/sku/batch_add?access_token=xxxxxxxxx
 */
-func SkuBatchAddSku(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuBatchAddSku, bytes.NewReader(payload), "application/json;charset=utf-8")
+func BatchAddSku(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiBatchAddSku, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 删除SKU
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/del_sku.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/del_sku.html
 POST https://api.weixin.qq.com/product/sku/del?access_token=xxxxxxxxx
 */
-func SkuDelSku(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuDelSku, bytes.NewReader(payload), "application/json;charset=utf-8")
+func DelSku(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiDelSku, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 获取SKU信息
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/get_sku.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/get_sku.html
 POST https://api.weixin.qq.com/product/sku/get?access_token=xxxxxxxxx
 */
-func SkuGetSku(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuGetSku, bytes.NewReader(payload), "application/json;charset=utf-8")
+func GetSku(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiGetSku, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 更新SKU
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/up_sku.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/up_sku.html
 POST https://api.weixin.qq.com/product/sku/update?access_token=xxxxxxxxx
 */
-func SkuUpSku(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuUpSku, bytes.NewReader(payload), "application/json;charset=utf-8")
+func UpSku(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiUpSku, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 更新SKU价格
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/up_sku_price.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/up_sku_price.html
 POST https://api.weixin.qq.com/product/sku/update_price?access_token=xxxxxxxxx
 */
-func SkuUpSkuPrice(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuUpSkuPrice, bytes.NewReader(payload), "application/json;charset=utf-8")
+func UpSkuPrice(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiUpSkuPrice, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 更新库存
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/up_stock.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/up_stock.html
 POST https://api.weixin.qq.com/product/sku/stock/update?access_token=xxxxxxxxx
 */
-func SkuUpStock(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuUpStock, bytes.NewReader(payload), "application/json;charset=utf-8")
+func UpStock(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiUpStock, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
 /*
 获取库存
 
-See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/sku/get_stock.html
+See: https://developers.weixin.qq.com/doc/MiniStore/minishopopencomponent/API/sku/get_stock.html
 POST https://api.weixin.qq.com/product/sku/stock/get?access_token=xxxxxxxxx
 */
-func SkuGetStock(ctx *ministore.Ministore, payload []byte) (resp []byte, err error) {
-	return ctx.Client.HTTPPost(apiSkuGetStock, bytes.NewReader(payload), "application/json;charset=utf-8")
+func GetStock(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+	return ctx.Client.HTTPPost(apiGetStock, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
