@@ -1,6 +1,6 @@
 # fastwego/ministore
 
-A fast [wechat miniprogram/ministore](https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/introduction.html) development sdk written in Golang
+A fast [wechat ministore](https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/introduction.html) development sdk written in Golang
 
 ## 快速开始 & demo
 
