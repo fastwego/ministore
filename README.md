@@ -9,7 +9,7 @@ go get github.com/fastwego/ministore
 ```
 
 ```go
-// 创建小程序/小游戏实例
+// 创建小商店
 app := ministore.New(ministore.Config{
     AccessToken: "aaabbb123",
 })
