@@ -1,4 +1,27 @@
+// Copyright 2020 FastWeGo
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package delivery
+
+import (
+	"github.com/fastwego/ministore"
+	"github.com/fastwego/ministore/test"
+	"net/http"
+	"os"
+	"reflect"
+	"testing"
+)
 
 func TestMain(m *testing.M) {
 	test.Setup()
@@ -10,11 +33,11 @@ func TestDeliveryGetDeliveryCompanyList(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiDeliveryGetDeliveryCompanyList, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiGetDeliveryCompanyList, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -23,7 +46,7 @@ func TestDeliveryGetDeliveryCompanyList(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -45,11 +68,11 @@ func TestDeliverySendDelivery(t *testing.T) {
 		"case1": []byte("{\"errcode\":0,\"errmsg\":\"ok\"}"),
 	}
 	var resp []byte
-	test.MockSvrHandler.HandleFunc(apiDeliverySendDelivery, func(w http.ResponseWriter, r *http.Request) {
+	test.MockSvrHandler.HandleFunc(apiSendDelivery, func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(resp))
 	})
 	type args struct {
-		ctx     *ministore.Ministore
+		ctx     *ministore.MiniStore
 		payload []byte
 	}
 	tests := []struct {
@@ -58,7 +81,7 @@ func TestDeliverySendDelivery(t *testing.T) {
 		wantResp []byte
 		wantErr  bool
 	}{
-		{name: "case1", args: args{ctx: test.MockMinistore}, wantResp: mockResp["case1"], wantErr: false},
+		{name: "case1", args: args{ctx: test.MockMiniStore}, wantResp: mockResp["case1"], wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
