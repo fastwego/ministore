@@ -23,13 +23,13 @@ import (
 func ExampleDeliveryGetDeliveryCompanyList() {
 	var ctx *ministore.MiniStore
 	payload := []byte("{}")
-	resp, err := delivery.DeliveryGetDeliveryCompanyList(ctx, payload)
+	resp, err := delivery.GetDeliveryCompanyList(ctx, payload)
 	fmt.Println(resp, err)
 }
 
 func ExampleDeliverySendDelivery() {
 	var ctx *ministore.MiniStore
 	payload := []byte("{}")
-	resp, err := delivery.DeliverySendDelivery(ctx, payload)
+	resp, err := delivery.SendDelivery(ctx, payload)
 	fmt.Println(resp, err)
 }

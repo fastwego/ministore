@@ -51,7 +51,7 @@ func TestDeliveryGetDeliveryCompanyList(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := DeliveryGetDeliveryCompanyList(tt.args.ctx, tt.args.payload)
+			gotResp, err := GetDeliveryCompanyList(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DeliveryGetDeliveryCompanyList() error = %v, wantErr %v", err, tt.wantErr)
@@ -86,7 +86,7 @@ func TestDeliverySendDelivery(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			resp = mockResp[tt.name]
-			gotResp, err := DeliverySendDelivery(tt.args.ctx, tt.args.payload)
+			gotResp, err := SendDelivery(tt.args.ctx, tt.args.payload)
 			//fmt.Println(string(gotResp), err)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DeliverySendDelivery() error = %v, wantErr %v", err, tt.wantErr)

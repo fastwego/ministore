@@ -31,7 +31,7 @@ const (
 See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/delivery/get_delivery_company_list.html
 POST https://api.weixin.qq.com/product/delivery/get_company_list?access_token=xxxxxxxxx
 */
-func DeliveryGetDeliveryCompanyList(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+func GetDeliveryCompanyList(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
 	return ctx.Client.HTTPPost(apiGetDeliveryCompanyList, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
 
@@ -41,6 +41,6 @@ func DeliveryGetDeliveryCompanyList(ctx *ministore.MiniStore, payload []byte) (r
 See: https://developers.weixin.qq.com/doc/ministore/minishopopencomponent/API/delivery/send_delivery.html
 POST https://api.weixin.qq.com/product/delivery/send?access_token=xxxxxxxxx
 */
-func DeliverySendDelivery(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
+func SendDelivery(ctx *ministore.MiniStore, payload []byte) (resp []byte, err error) {
 	return ctx.Client.HTTPPost(apiSendDelivery, bytes.NewReader(payload), "application/json;charset=utf-8")
 }
